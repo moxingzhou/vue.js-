@@ -20,7 +20,7 @@ watcher.prototype={
         var olderValue = this.value;
         if (value !== olderValue){
             this.value = value;
-            this.cb.call(this.$vm , value , olderValue)
+            this.cb.call(this.$vm , value , olderValue);
         }
     },
     get:function () {
@@ -33,7 +33,7 @@ watcher.prototype={
         var exps = exp.split('.');
         return function (obj) {
             for (let i = 0 ; i < exps.length ; i++){
-                obj = obj[exps[i]]
+                obj = obj[exps[i]];
             }
 
             return obj;
@@ -41,8 +41,8 @@ watcher.prototype={
     },
     addDep:function (dep) {
         if (!this.updatedep.hasOwnProperty(dep.id)){
-            dep.addSub(this)
-            this.updatedep[dep.id] = dep
+            dep.addSub(this);
+            this.updatedep[dep.id] = dep;
         }
     }
 }
