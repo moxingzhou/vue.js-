@@ -4,6 +4,7 @@ function watcher(vm , key , cb) {
     var that = this;
     this.updatedep = {};
     if (typeof key === "function"){
+<<<<<<< HEAD
         this.getter = key
     }else {
         this.getter = that.parentData(key)
@@ -11,6 +12,14 @@ function watcher(vm , key , cb) {
     this.value = this.get();
 }
 
+=======
+        this.getter = key;
+    }else {
+        this.getter = that.parentData(key);
+    }
+    this.value = this.get();
+}
+>>>>>>> 测试
 watcher.prototype={
     update:function () {
         this.run();
@@ -20,7 +29,11 @@ watcher.prototype={
         var olderValue = this.value;
         if (value !== olderValue){
             this.value = value;
+<<<<<<< HEAD
             this.cb.call(this.$vm , value , olderValue)
+=======
+            this.cb.call(this.$vm , value , olderValue);
+>>>>>>> 测试
         }
     },
     get:function () {
@@ -33,7 +46,11 @@ watcher.prototype={
         var exps = exp.split('.');
         return function (obj) {
             for (let i = 0 ; i < exps.length ; i++){
+<<<<<<< HEAD
                 obj = obj[exps[i]]
+=======
+                obj = obj[exps[i]];
+>>>>>>> 测试
             }
 
             return obj;
@@ -42,7 +59,11 @@ watcher.prototype={
     addDep:function (dep) {
         if (!this.updatedep.hasOwnProperty(dep.id)){
             dep.addSub(this)
+<<<<<<< HEAD
             this.updatedep[dep.id] = dep
+=======
+            this.updatedep[dep.id] = dep;
+>>>>>>> 测试
         }
     }
 }
