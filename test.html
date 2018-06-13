@@ -6,9 +6,10 @@
 </head>
 <body>
   <div id="vm">
-    <input v-model="text" type="text">
-    <p v-text="text" ></p>
-    <button>change model</button>
+    <input m-model="text" type="text">
+    <p m-text="text"></p>
+    <p m-if="text == 't'">测试成功</p>
+    <button @click="testClick">change model</button>
   </div>
   <script src="testObserver.js"></script>
   <script src="testWatcher.js"></script>
@@ -20,6 +21,11 @@
           data:{
               text:'t',
               test:'sa'
+          },
+          methods:{
+              testClick:function () {
+                  this.text ='test success !!'
+              }
           }
       })
   </script>

@@ -3,80 +3,54 @@ function watcher(vm , key , cb) {
     this.cb  = cb;
     var that = this;
     this.updatedep = {};
+    //判断是否传进是否为方法
     if (typeof key === "function"){
-<<<<<<< HEAD
         this.getter = key
     }else {
+        //获取回调方法
         this.getter = that.parentData(key)
     }
+    //获取数据
     this.value = this.get();
 }
 
-=======
-        this.getter = key;
-    }else {
-        this.getter = that.parentData(key);
-    }
-    this.value = this.get();
-}
->>>>>>> 测试
 watcher.prototype={
     update:function () {
         this.run();
     },
+    //更新视图
     run:function () {
         var value = this.get();
         var olderValue = this.value;
         if (value !== olderValue){
             this.value = value;
-<<<<<<< HEAD
+            //调用回调事件进行更新视图
             this.cb.call(this.$vm , value , olderValue);
-=======
-<<<<<<< HEAD
-            this.cb.call(this.$vm , value , olderValue)
-=======
-            this.cb.call(this.$vm , value , olderValue);
->>>>>>> 测试
->>>>>>> 4b5cbf10af0e06bfeffc0396b93c06cd31b26c52
         }
     },
+    //获取数据
     get:function () {
         Dep.target = this;
+        //会触发observer中的get从而触发Dep.addSub
         var value = this.getter.call(this.$vm , this.$vm);
         return value
     },
     parentData:function (exp) {
         if (/[^\w.$]/.test(exp)) return;
         var exps = exp.split('.');
+        //防止出现如：form.name的类型数据获取不到数据的现象出现。
         return function (obj) {
             for (let i = 0 ; i < exps.length ; i++){
-<<<<<<< HEAD
                 obj = obj[exps[i]];
-=======
-<<<<<<< HEAD
-                obj = obj[exps[i]]
-=======
-                obj = obj[exps[i]];
->>>>>>> 测试
->>>>>>> 4b5cbf10af0e06bfeffc0396b93c06cd31b26c52
             }
-
             return obj;
         }
     },
     addDep:function (dep) {
+        //判断订阅器是否存在，如果存在只是数据更新不需要添加新的订阅者，否则添加
         if (!this.updatedep.hasOwnProperty(dep.id)){
-<<<<<<< HEAD
             dep.addSub(this);
-            this.updatedep[dep.id] = dep;
-=======
-            dep.addSub(this)
-<<<<<<< HEAD
             this.updatedep[dep.id] = dep
-=======
-            this.updatedep[dep.id] = dep;
->>>>>>> 测试
->>>>>>> 4b5cbf10af0e06bfeffc0396b93c06cd31b26c52
         }
     }
 }
